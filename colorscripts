@@ -39,6 +39,7 @@ while getopts "lre:s" opt; do
                randindex=$(($RANDOM%$colorscriptwc))
                cd "$shellcolorscriptdir"
                ./"${scs[$randindex]}"
+               echo ""
                exit 0
                ;;
             e)
@@ -49,6 +50,7 @@ while getopts "lre:s" opt; do
 
                fi
                ./"${OPTARG}"
+               echo ""
                exit 0
                ;;
             s)
@@ -59,6 +61,7 @@ while getopts "lre:s" opt; do
                echo ""
                cd "$shellcolorscriptdir"
                ./"$script"
+               echo ""
                exit 0
                ;;
             *)
