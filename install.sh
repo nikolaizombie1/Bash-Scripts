@@ -19,6 +19,8 @@ select install in "Just my user" "All users on the system" "Do not install"; do
     break
 done
 
+currentshell="$(echo "$SHELL" | rev | cut -d '/' -f 1 | rev)"
+
 if [ "$install" = "All users on the system" ]; then
     if [ ! -d /usr/share/colorscripts ]; then
         sudo mkdir /usr/share/colorscripts
@@ -41,16 +43,25 @@ elif [ "$install" = "Just my user" ]; then
     cp -a "$PWD/.colorscripts/." "$HOME/.colorscripts"
     chmod 755 -R "$HOME/.colorscripts"
     echo "$USER user install complete"
+    if [ -z "$(echo "$PATH " | grep "$HOME/Scripts")" ]; then
+        if [ "$currentshell" = "zsh" ]; then
+            echo "path+=($HOME/Scripts/)" >> "$HOME/.zshrc"
+        elif [ "$currentshell" = "bash" ]; then
+            echo "PATH=$PATH:~$HOME/Scripts" >> "$HOME/.bashrc"
+        else
+            echo "$currentshell shell path appending is not supported. Please add $HOME/Scripts to your shell."
+        fi
+    fi
 fi
 
 read -p "Would you like to autostart colorscripts -r when starting your current shell [y/n]: " yesno
 
 if [ "$yesno" = y ] || [ "$yesno" = Y ]; then
-    if [ "$(echo "$SHELL" | rev | cut -d '/' -f 1 | rev)" = "zsh" ]; then
+    if [ "$currentshell" = "zsh" ]; then
         echo "colorscripts -r" >> "$HOME/.zshrc"
-    elif [ "$(echo "$SHELL " | rev | cut -d '/' -f 1 | rev)" = "bash " ]; then
+    elif [ "$currentshell" = "bash" ]; then
         echo "colorscripts -r" >> "$HOME/.bashrc"
     else
-        echo "$(echo "$SHELL" | rev | cut -d '/' -f 1 | rev) shell is not supported"
+        echo "$currentshell shell is not supported"
     fi
 fi
