@@ -9,6 +9,7 @@
 
 # Usage
 # Usage: ./colorscripts [-l] [-r] [-e <NAME>] [-s]
+
 if [ -f /etc/colorscripts.conf ]; then
     shellcolorscriptdir=/usr/share/colorscripts
 else

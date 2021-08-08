@@ -17,7 +17,7 @@ This will make the install script executable and prompt the user to choose wheth
 **NOTE:** It will prompt the user for super user privileges depending on the type of installation chosen. Mac OS might work but it is untested.
 
 ### Usage
-   -  colorscript [-l] [-r] [-e (NAME)] [-s]
+   -  colorscripts [-l] [-r] [-e (NAME)] [-s]
    -  -l Lists all currently available color scripts
    -  -r Executes a random color script
    -  -e (NAME) Executes the given color script
