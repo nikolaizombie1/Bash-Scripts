@@ -9,8 +9,11 @@
 
 # Usage
 # Usage: ./colorscripts [-l] [-r] [-e <NAME>] [-s]
-
-shellcolorscriptdir=$HOME/.colorscripts
+if [ -f /etc/colorscripts.conf ]; then
+    shellcolorscriptdir=/usr/share/colorscripts
+else
+    shellcolorscriptdir=$HOME/.colorscripts
+fi
 
 usage()
 {
@@ -23,8 +26,6 @@ if [ ! -d "$HOME/.colorscripts"  ]; then
     echo "Place your shell color scripts in $shellcolorscriptdir"
     exit 1
 fi
-
-chmod 755 -R "$shellcolorscriptdir"
 
 readarray -t scs < <(ls $shellcolorscriptdir)
 
