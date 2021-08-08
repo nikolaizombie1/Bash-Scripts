@@ -2,7 +2,7 @@
 
 # Author: Fabio J. Matos Nieves
 # Date Created: 07/8/2021
-# Last Modified: 07/8/2021
+# Last Modified: 08/8/2021
 
 # Description
 # This script selects or prompts you to select a color script to run in your terminal regardless of distrobution
@@ -21,7 +21,7 @@ usage()
 
 }
 
-if [ ! -d "$HOME/.colorscripts"  ]; then
+if [ ! -d "$shellcolorscriptdir" ]; then
     mkdir "$HOME/.colorscripts"
     echo "Place your shell color scripts in $shellcolorscriptdir"
     exit 1
@@ -29,7 +29,7 @@ fi
 
 readarray -t scs < <(ls $shellcolorscriptdir)
 
-while getopts "lre:s" opt; do
+while getopts "lre:s'-random'" opt; do
         case "${opt}" in
             l)
                ls "$shellcolorscriptdir"
@@ -67,7 +67,6 @@ while getopts "lre:s" opt; do
                ;;
     esac
 done
-
 
 if [ -z "$1" ] || [ -z "$e" ]; then
     usage

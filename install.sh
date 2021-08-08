@@ -43,12 +43,12 @@ elif [ "$install" = "Just my user" ]; then
     echo "$USER user install complete"
 fi
 
-read -pr "Would you like to autostart colorscripts -r when starting your current shell [y/n]: " yn
+read -p "Would you like to autostart colorscripts -r when starting your current shell [y/n]: " yesno
 
-if [ "$yn" = y ] || [ "$yn" = Y ]; then
+if [ "$yesno" = y ] || [ "$yesno" = Y ]; then
     if [ "$(echo "$SHELL" | rev | cut -d '/' -f 1 | rev)" = "zsh" ]; then
         echo "colorscripts -r" >> "$HOME/.zshrc"
-    elif [ "$(echo "$SHELL " | rev | cut -d '/' -f 1 | rev)" = "bash" ]; then
+    elif [ "$(echo "$SHELL " | rev | cut -d '/' -f 1 | rev)" = "bash " ]; then
         echo "colorscripts -r" >> "$HOME/.bashrc"
     else
         echo "$(echo "$SHELL" | rev | cut -d '/' -f 1 | rev) shell is not supported"
