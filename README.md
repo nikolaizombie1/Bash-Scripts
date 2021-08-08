@@ -7,7 +7,7 @@ ___
 This script selects or prompts you to select a color script to run in your terminal regardless of distribution
 
 ### Usage
-   -  Usage: $0 [-l] [-r] [-e <NAME>] [-s]
+   -  Usage: ./colorscript [-l] [-r] [-e <NAME>] [-s]
    -  -l Lists all currently available color scripts
    -  -r Executes a random color script
    -  -e <NAME> Executes the given color script

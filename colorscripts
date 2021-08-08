@@ -8,7 +8,7 @@
 # This script selects or prompts you to select a color script to run in your terminal regardless of distrobution
 
 # Usage
-# Usage: ./colorscripts.sh [-l] [-r] [-e <NAME>] [-s]
+# Usage: ./colorscripts [-l] [-r] [-e <NAME>] [-s]
 
 shellcolorscriptdir=$HOME/.colorscripts
 
