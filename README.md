@@ -6,6 +6,8 @@ ___
 ### Description
 This script selects or prompts you to select a color script to run in your terminal regardless of distribution
 
+**Note** The provided .colorscripts folder should be placed in your home directory or where ever you would like if you modify the script. namely the shellcolorscriptdir variable at the top of the script
+
 ### Usage
    -  ./colorscript [-l] [-r] [-e (NAME)] [-s]
    -  -l Lists all currently available color scripts
