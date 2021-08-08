@@ -14,7 +14,7 @@ chmod 755 install.sh && ./install.sh
 
 This will make the install script executable and prompt the user to choose whether to install to the current user or for all the users on the system.
 
-**NOTE:** It will prompt the user for super user privileges depending on the type of installation chosen. MAC OS might work but it is untested.
+**NOTE:** It will prompt the user for super user privileges depending on the type of installation chosen. Mac OS might work but it is untested.
 
 ### Usage
    -  colorscript [-l] [-r] [-e (NAME)] [-s]
