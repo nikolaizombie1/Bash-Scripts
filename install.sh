@@ -19,7 +19,7 @@ select install in "Just my user" "All users on the system" "Do not install"; do
     break
 done
 
-currentshell="$(echo "$SHELL" | rev | cut -d '/' -f 1 | rev)"
+currentshell="$(echo "$SHELL" | awk -F "/" '{print $NF}')"
 
 if [ "$install" = "All users on the system" ]; then
     if [ ! -d /usr/share/colorscripts ]; then
