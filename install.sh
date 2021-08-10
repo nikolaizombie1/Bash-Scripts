@@ -46,8 +46,10 @@ elif [ "$install" = "Just my user" ]; then
     if [ -z "$(echo "$PATH " | grep "$HOME/Scripts")" ]; then
         if [ "$currentshell" = "zsh" ]; then
             echo "path+=($HOME/Scripts/)" >> "$HOME/.zshrc"
+            source "$HOME/.zshrc"
         elif [ "$currentshell" = "bash" ]; then
         	echo 'export PATH=$PATH:~/Scripts/' >> "$HOME/.bashrc"
+            source "$HOME/.bashrc"
         else
             echo "$currentshell shell path appending is not supported. Please add $HOME/Scripts to your shell."
         fi
