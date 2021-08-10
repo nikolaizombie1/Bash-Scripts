@@ -9,7 +9,7 @@ This script selects or prompts you to select a color script to run in your termi
 ### Installation
 
 ``` sh
-chmod 755 install.sh && ./install.sh 
+cd Bash-Scripts ; chmod 755 install.sh && ./install.sh 
 ```
 
 This will make the install script executable and prompt the user to choose whether to install to the current user or for all the users on the system.
