@@ -60,9 +60,9 @@ read -p "Would you like to autostart colorscripts -r when starting your current 
 
 if [ "$yesno" = y ] || [ "$yesno" = Y ]; then
     if [ "$currentshell" = "zsh" ]; then
-        echo "colorscripts -r" >> "$HOME/.zshrc"
+        echo "colorscripts -r" | tee >> "$HOME/.zshrc"
     elif [ "$currentshell" = "bash" ]; then
-        echo "colorscripts -r" >> "$HOME/.bashrc"
+        echo "colorscripts -r" | tee >> "$HOME/.bashrc"
     else
         echo "$currentshell shell is not supported"
     fi
