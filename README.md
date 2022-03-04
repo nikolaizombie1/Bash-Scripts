@@ -22,6 +22,8 @@ This will make the install script executable and prompt the user to choose wheth
    -  -r Executes a random color script
    -  -e (NAME) Executes the given color script
    -  -s Displays a menu of the available color scripts and prompts the user to chose one
+   -  -b Displays all unblacklisted color scripts and prompts the user to select a color script to blacklist
+   -  -u Displays all blacklisted color scripts and prompts the user to select a color script to unblacklist
    
 ### Uninstallation
 
@@ -33,6 +35,8 @@ chmod 755 install.sh && ./uninstall.sh
 This will make the install script executable and will remove all executable binaries and config files.
 
 **NOTE:** It will prompt the user for super user privileges depending on the type of installation chosen.
+
+**Warning:** The bomber, pipes1, pipes2, pipes2-slim scripts are animated. This can cause some terminals to get stuck in the animation. 
 
 ___
 

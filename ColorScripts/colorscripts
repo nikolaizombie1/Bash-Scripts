@@ -21,7 +21,7 @@ fi
 
 usage()
 {
-    echo "Usage: $0 [-l] [-r] [-e <NAME>] [-s]" ; echo "-l Lists all currently available color scripts" ; echo "-r Executes a random color script"; echo "-e <NAME> Executes the given color script" ; echo "-s Displays a menu of the available color scripts and prompts the user to chose one" 1>&2; exit 1;
+    echo "Usage: $0 [-l] [-r] [-e <NAME>] [-s]" ; echo "-l Lists all currently available color scripts" ; echo "-r Executes a random color script"; echo "-e <NAME> Executes the given color script" ; echo "-s Displays a menu of the available color scripts and prompts the user to chose one" ; echo "-b Displays all unblacklisted color scripts and prompts the user to select a color script to blacklist"  ; echo "-u Displays all blacklisted color scripts and prompts the user to select a color script to unblacklist" 1>&2; exit 1;
 
 }
 
@@ -103,6 +103,9 @@ while getopts "lresbu" opt; do
                    echo "There are no blacklisted scripts"
                    exit 0
                fi
+               ;;
+            h)
+               usage
                ;;
             *)
                usage
