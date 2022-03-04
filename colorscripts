@@ -10,8 +10,11 @@
 # Usage
 # Usage: ./colorscripts [-l] [-r] [-e <NAME>] [-s]
 
+sudoneeded=0
+
 if [ -f /etc/colorscripts.conf ]; then
     shellcolorscriptdir=/usr/share/colorscripts
+    sudoneeded=1
 else
     shellcolorscriptdir=$HOME/.colorscripts
 fi
@@ -28,16 +31,21 @@ if [ ! -d "$shellcolorscriptdir" ]; then
     exit 1
 fi
 
-readarray -t scs < <(ls $shellcolorscriptdir)
+readarray -t scs < <(ls -Iblacklist $shellcolorscriptdir)
 
-while getopts "lre:s'-random'" opt; do
+while getopts "lresbu" opt; do
         case "${opt}" in
             l)
-               ls "$shellcolorscriptdir"
+               n=1
+               for script in "${scs[@]}";
+               do
+                   echo "$n $script"
+                   n=$(( $n+1 ))
+               done
                exit 0
                ;;
             r)
-               colorscriptwc=$(ls "$shellcolorscriptdir" | wc -l)
+               colorscriptwc=$(ls -Iblacklist "$shellcolorscriptdir" | wc -l)
                randindex=$(($RANDOM%$colorscriptwc))
                cd "$shellcolorscriptdir"
                ./"${scs[$randindex]}"
@@ -62,6 +70,39 @@ while getopts "lre:s'-random'" opt; do
                cd "$shellcolorscriptdir"
                ./"$script"
                exit 0
+               ;;
+            b)
+               PS3="Which script would you like to blacklist: "
+               select script in ${scs[@]}; do
+                   break
+               done
+               if [ $sudoneeded -eq 1 ]; then
+                   sudo mv "$shellcolorscriptdir/$script" "$shellcolorscriptdir/blacklist/"
+               else
+                   cd "$shellcolorscriptdir"
+                   mv $script blacklist
+               fi
+               exit 0
+               ;;
+            u)
+               PS3="Which script would you like to unblacklist: "
+               readarray -t uscs < <(ls "$shellcolorscriptdir/blacklist")
+               if [ "${#uscs[@]}" -gt 0 ]; then
+                  select script in "${uscs[@]}";
+                  do
+                      break
+                  done
+                  if [ $sudoneeded -eq 1 ]; then
+                      sudo mv "$shellcolorscriptdir/blacklist/$script" "$shellcolorscriptdir"
+                  else
+                      cd "$shellcolorscriptdir"
+                      mv "blacklist/$script" "$shellcolorscriptdir"
+                  fi
+                  exit 0
+               else
+                   echo "There are no blacklisted scripts"
+                   exit 0
+               fi
                ;;
             *)
                usage

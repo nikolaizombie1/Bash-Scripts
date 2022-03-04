@@ -24,6 +24,9 @@ currentshell="$(echo "$SHELL" | awk -F "/" '{print $NF}')"
 if [ "$install" = "All users on the system" ]; then
     if [ ! -d /usr/share/colorscripts ]; then
         sudo mkdir /usr/share/colorscripts
+        if [ ! -d /usr/share/colorscripts/blacklist ]; then
+           sudo mkdir /usr/share/colorscripts/blacklist
+        fi
     fi
     sudo cp -a "$PWD/.colorscripts/." /usr/share/colorscripts
     sudo chmod -R 775 /usr/share/colorscripts
@@ -39,6 +42,7 @@ elif [ "$install" = "Just my user" ]; then
     chmod 755 "$HOME/Scripts/colorscripts"
     if [ ! -d "$HOME/.colorscripts" ]; then
         mkdir "$HOME/.colorscripts"
+        mkdir "$HOME/.colorscripts/blacklist"
     fi
     cp -a "$PWD/.colorscripts/." "$HOME/.colorscripts"
     chmod 755 -R "$HOME/.colorscripts"
@@ -51,12 +55,12 @@ elif [ "$install" = "Just my user" ]; then
         	echo 'export PATH=$PATH:~/Scripts/' >> "$HOME/.bashrc"
             source "$HOME/.bashrc"
         else
-            echo "$currentshell shell path appending is not supported. Please add $HOME/Scripts to your shell."
+            echo "$currentshell shell path appending is not supported. Please add $HOME/Scripts to your shell's path."
         fi
     fi
 fi
 
-read -p "Would you like to autostart colorscripts -r when starting your current shell [y/n]: " yesno
+read -p "Would you like to execute colorscripts -r when starting your current shell [y/n]: " yesno
 
 if [ "$yesno" = y ] || [ "$yesno" = Y ]; then
     if [ "$currentshell" = "zsh" ]; then
