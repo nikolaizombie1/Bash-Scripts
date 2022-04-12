@@ -10,7 +10,7 @@
 # Usage
 # Usage: ./plexformatter
 
-readarray -t episodes < <(command find -type f | cut -d'/' -f2 | command sort -V)
+readarray -t episodes < <(command find -maxdepth 1 -type f | cut -d'/' -f2 | command sort -V)
 if [ "${#episodes[@]}" -eq 0 ]
 then
     echo "The current directory is empty"
