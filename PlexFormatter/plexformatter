@@ -10,13 +10,13 @@
 # Usage
 # Usage: ./plexformatter
 
-readarray -t episodes < <(command ls | command sort -V)
+readarray -t episodes < <(command find -type f | cut -d'/' -f2 | command sort -V)
 if [ "${#episodes[@]}" -eq 0 ]
 then
     echo "The current directory is empty"
     exit 1
 fi
-extention=$(command echo ${episodes[0]} | cut -d'.' -f2)
+extention=$(command echo ${episodes[0]} | awk 'BEGIN { FS = "." } {print $NF}')
 read -p "What is the name you would like the episodes to be called? " name
 read -p "What season are the episodes? " season
 if ! [ "$season" -eq "$season" ] 2> /dev/null
