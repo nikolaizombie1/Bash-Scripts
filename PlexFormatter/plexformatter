@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+readarray -t episodes < <(command ls | command sort -V)
+if [ "${#episodes[@]}" -eq 0 ]
+then
+    echo "The current directory is empty"
+    exit 1
+fi
+read -p "What is the name you would like the episodes to be called? " name
+read -p "What season are the episodes? " season
+if ! [ "$season" -eq "$season" ] 2> /dev/null
+then
+    echo "Season is not an integer"
+    exit 1
+fi
+read -p "Would you like to preview the output of the files?[y/n] " yesno
+if [ "$yesno" == "y" ]
+then
+    i=0
+    while [ "$i" -lt "${#episodes[@]}" ];
+    do
+        echo -n "${episodes["$i"]}" ; echo -n " -----> "
+        echo -n "$name " ; echo -n "S" ; echo -n "$season" ; echo -n "E" ; echo "$((i+1))"
+        ((i=i+1))
+    done
+fi
+echo "WARNING: There is no undo. All changes are permanent."
+read -p "Would you like to write the changes to the files? [y/n] " yesno
+if [ "$yesno" == "n" ]
+then
+    echo "Script is closing."
+    exit 0
+elif [ "$yesno" == "y" ]
+then
+    i=0
+    while [ "$i" -lt "${#episodes[@]}" ];
+    do
+        title="$name S"$season"E"$((i+1))""
+        mv "${episodes["$i"]}" "$title"
+        ((i=i+1))
+    done
+else
+    echo "Script is closing."
+    exit 0
+fi
+echo "Files renamed succesfully"
+exit 0
