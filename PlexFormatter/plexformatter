@@ -16,6 +16,7 @@ then
     echo "The current directory is empty"
     exit 1
 fi
+extention=$(command echo ${episodes[0]} | cut -d'1' -f2)
 read -p "What is the name you would like the episodes to be called? " name
 read -p "What season are the episodes? " season
 if ! [ "$season" -eq "$season" ] 2> /dev/null
@@ -30,7 +31,7 @@ then
     while [ "$i" -lt "${#episodes[@]}" ];
     do
         echo -n "${episodes["$i"]}" ; echo -n " -----> "
-        echo -n "$name " ; echo -n "S" ; echo -n "$season" ; echo -n "E" ; echo "$((i+1))"
+        echo -n "$name " ; echo -n "S" ; echo -n "$season" ; echo -n "E" ; echo -n "$((i+1))" ; echo "$extention"
         ((i=i+1))
     done
 fi
@@ -45,7 +46,7 @@ then
     i=0
     while [ "$i" -lt "${#episodes[@]}" ];
     do
-        title="$name S"$season"E"$((i+1))""
+        title="$name S"$season"E"$((i+1))""$extention""
         mv "${episodes["$i"]}" "$title"
         ((i=i+1))
     done
