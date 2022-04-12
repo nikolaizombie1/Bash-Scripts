@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+# Author: Fabio J. Matos Nieves
+# Date Created: 11/4/2022
+# Last Modified: 12/4/2022
+
+# Description
+# This script renames files in the format for plexmediaserver in the current working directory
+
+# Usage
+# Usage: ./plexformatter
+
 readarray -t episodes < <(command ls | command sort -V)
 if [ "${#episodes[@]}" -eq 0 ]
 then
