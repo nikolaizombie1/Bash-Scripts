@@ -40,5 +40,21 @@ This will make the install script executable and will remove all executable bina
 
 ___
 
-## Sources
+### Sources
 Color scripts: Derek Taylor (https://gitlab.com/dwt1/shell-color-scripts)
+
+## PlexFormatter
+___
+
+### Description
+This script will format the names of the files into the format recognized by Plex Media Server. It will first prompt the user to preview the files, then prompt for confirmation before writing the files and then the user can optionally allow to re arrange the files to organize them for a Plex Media Server installation.
+
+### Making it executable
+
+``` sh
+chmod 755 plexformatter
+```
+
+**NOTE** The script will only search n the current working directory. It will not search in sub directories inside the current working directory.
+
+**NOTE** The script can be executed as is. However, it is recommended to be placed in a directory that is in the $PATH variable for ease of use.
